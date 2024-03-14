@@ -213,33 +213,33 @@ class Route(models.Model):
     def get_station(self, s_id):
         return self.routepoint_set.all().filter(id=s_id)
 
-    def get_first_station(self):  # станция отправления
-        rp = RoutePoint.objects.get(id_route=self.id).filter(departure_time=Min('departure_time'))
-        st = Station.objects.get(id=rp.id_station)
-        rp.aggregate(dep_st=st.name)
-        return rp
-
-    def get_last_station(self):  # станция прибытия
-        return self.routepoint_set.aggregate(arr=Max('arrive_time'))
-
-    def get_rp_in_city(self, city_name):
-        ct = City.objects.filter(name=Value(city_name)).only('id').all()
-        st = Station.objects.filter(city__in=ct).only('id').all()
-        rp = RoutePoint.objects.filter(id_station__in=st).all()
-        rp1 = rp.filter(id_route=self.id)
-        return rp1
-
-    def get_all_places(self):  # выдача всех мест
-        tr = Train.objects.filter(id=self.id_train).only('id').all()  # выбираем поезд
-        car = Carriage.objects.filter(id_train__in=tr).only('id').all()  # выбираем вагоны
-
-    @staticmethod
-    def get_routes_in_city(city_name):
-        ct = City.objects.filter(name=Value(city_name)).only('id').all()
-        st = Station.objects.filter(city__in=ct).only('id').all()
-        rp = RoutePoint.objects.filter(id_station__in=st).all()
-        rt = Route.objects.filter(id__in=rp)
-        return rt;
+    # def get_first_station(self):  # станция отправления
+    #     rp = RoutePoint.objects.get(id_route=self.id).filter(departure_time=Min('departure_time'))
+    #     st = Station.objects.get(id=rp.id_station)
+    #     rp.aggregate(dep_st=st.name)
+    #     return rp
+    #
+    # def get_last_station(self):  # станция прибытия
+    #     return self.routepoint_set.aggregate(arr=Max('arrive_time'))
+    #
+    # def get_rp_in_city(self, city_name):
+    #     ct = City.objects.filter(name=Value(city_name)).only('id').all()
+    #     st = Station.objects.filter(city__in=ct).only('id').all()
+    #     rp = RoutePoint.objects.filter(id_station__in=st).all()
+    #     rp1 = rp.filter(id_route=self.id)
+    #     return rp1
+    #
+    # def get_all_places(self):  # выдача всех мест
+    #     tr = Train.objects.filter(id=self.id_train).only('id').all()  # выбираем поезд
+    #     car = Carriage.objects.filter(id_train__in=tr).only('id').all()  # выбираем вагоны
+    #
+    # @staticmethod
+    # def get_routes_in_city(city_name):
+    #     ct = City.objects.filter(name=Value(city_name)).only('id').all()
+    #     st = Station.objects.filter(city__in=ct).only('id').all()
+    #     rp = RoutePoint.objects.filter(id_station__in=st).all()
+    #     rt = Route.objects.filter(id__in=rp)
+    #     return rt;
 
     @staticmethod
     def test1_get_rt_from_to_cityname(dep_city_name, arr_city_name, date):
