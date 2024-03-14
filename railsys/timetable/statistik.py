@@ -93,20 +93,3 @@ def object_home(request, obj_class, session_key, detail_url_name, home_url_name,
         'create_url_name':create_url_name,
     }
     return render(request, home_url, data)
-# def object_view(request, obj_class, session_key, detail_url, for_key_name):
-#     print("Просмотр details_view")
-#     chosen_id = request.session.get(session_key)
-#     mes = ""
-#     if (obj_class.objects.filter(id=chosen_id).count() > 0):
-#         route = obj_class.objects.get(id=chosen_id)
-#     else:
-#         mes = "Такого объекта не существует!"
-#         return render(request, detail_url, {'mes': mes})
-#     sub_obj = obj_class.objects.filter(id_route=chosen_id).order_by('departure_time')
-#     print(rp)
-#     data = {
-#         'route': route,
-#         'mes': mes,
-#         'rp': sub_obj
-#     }
-#     return render(request, detail_url, data)
