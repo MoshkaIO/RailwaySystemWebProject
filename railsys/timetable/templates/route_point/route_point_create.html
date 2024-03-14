@@ -1,0 +1,29 @@
+{% extends 'main/layout.html' %}
+{% block title %}Добавление остановки{% endblock %}
+{% block content %}
+    <div class="features">
+        <h1>Добавление остановки</h1>
+        <form method="POST">
+<!--            action="{% url 'route-home' %}"-->
+            {% csrf_token %}
+            <h3> Рейс </h3>
+            {{form.id_route}}
+            <h3> Станция: </h3>
+            {{form.id_station}}
+            <h3> Время прибытия: </h3>
+            <p> Оставьте пустым для станции отправления</p>
+            {{form.arrive_time}}
+            <h3> Время отправления: </h3>
+            <p> Оставьте пустым для станции прибытия</p>
+            {{form.departure_time}}
+            <h3> Есть ли посадка в поезд: </h3>
+            {{form.boarding}}
+<!--            fields = ['id_station','id_route','arrive_time','departure_time','boarding']-->
+            <span>{{error}}</span>
+             <a href="{% url 'route-point-home' %}" class="green"> Вернуться к списку </a>
+
+            <button type="submit">Добавить рейс</button>
+        </form>
+
+    </div>
+{% endblock %}

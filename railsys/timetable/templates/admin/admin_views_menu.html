@@ -1,0 +1,45 @@
+{% extends 'main/layout.html' %}
+    {% block title %}Админ-панель{% endblock %}
+{% block content %}
+    <div class="features">
+        <div class="preticket-strip">
+            <h1>Админ-панель</h1>
+
+        {% if user.is_authenticated %}
+            <div >
+                {% if user.is_staff %}
+                <h2> Меню: </h2>
+                <p> Рейсы </p>
+                <a href="{% url 'route-home'%}" class="green"> Рейсы </a>
+                <p> Остановки </p>
+                <a href="{% url 'route-point-home'%}" class="green"> Остановки </a>
+                <p> Станции </p>
+                <p> Города </p>
+
+                <p> Поезда </p>
+                <a href="{% url 'train-home'%}" class="green"> Поезда </a>
+                <p> Вагоны </p>
+                <p> Типы вагонов </p>
+                <p> Места </p>
+                {% else %}
+                <h4> Доступ запрещён. Зайдите с другого аккаунта </h4>
+                <a href="{% url 'logout'%}?next={{request.path}}" class="green">Выйти</a>
+                {% endif %}
+                    {% else %}
+                <h4> Вы не вошли в систему </h4>
+                <a href="{% url 'login'%}?next={{request.path}}" class="green">Войти</a>
+                    {% endif %}
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+{% endblock %}

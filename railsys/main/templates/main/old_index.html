@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div class="features">
+        <h1>{{title}}</h1>
+        <p>заглушка</p>
+        <button class="btn btn-warning"> В АЗКАБАН!</button>
+        {{values}}
+        {% for  el in values %}
+        <p>{{ el }}</p>
+        {% endfor %}
+        {{ obj|upper }}
+        {% for  el in obj %}
+        <p>{{ el }}</p>
+        {% endfor %}
+          {% for  el in obj.values %}
+        {% if el != 'train8' %}
+        {% filter upper %}
+        <p>{{ el }}</p>
+        {% endfilter %}
+        {% endif %}
+        {% endfor %}
+    </div>
+</head>
+<body>
+
+</body>
+</html>

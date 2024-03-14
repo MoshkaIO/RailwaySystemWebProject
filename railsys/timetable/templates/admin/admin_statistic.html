@@ -1,0 +1,33 @@
+{% extends 'main/layout.html' %}
+    {% block title %}Админ-панель {% endblock %}
+{% block content %}
+    <div class="features">
+        <div class="preticket-strip">
+            <h1>Админ-панель</h1>
+        {% if user.is_authenticated %}
+            <div class="preticket-strip">
+                {% if user.is_staff %}
+                <h2> Общая статистика: </h2>
+                <h3> Количество   поездов   {{tr_count}}</h3>
+                <h3> Количество     вагонов {{car_count}}</h3>
+                <h3> Количество    разновидностей вагонов  {{car_type_count}}</h3>
+                <h3> Количество    сидений  {{seat_count}}</h3>
+                <h3> Количество    рейсов  {{r_count}}</h3>
+                <h3> Количество    остановок {{rp_count}}</h3>
+                <h3> Количество    станций  {{st_count}}</h3>
+                <h3> Количество    станций  {{ct_count}}</h3>
+                <h3> Выручка  {{money.price__sum}}</h3>
+                <h3> Средняя цена билета:  {{ev_price.price__avg}}</h3>
+                <h3> Среднее число мест в вагоне  {{ev_places.number_of_Seat__sum}}</h3>
+                {% else %}
+                <h4> Доступ запрещён. Зайдите с другого аккаунта </h4>
+                <a href="{% url 'logout'%}?next={{request.path}}" class="green">Выйти</a>
+                {% endif %}
+                    {% else %}
+                <h4> Вы не вошли в систему </h4>
+                <a href="{% url 'login'%}?next={{request.path}}" class="green">Войти</a>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>{% block title %} RZD {% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap" rel="stylesheet" />
+      <link rel="stylesheet" href="{% static 'main/css/main.css'%}">
+    <link href="main/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link  rel="stylesheet" href="{% static 'main/css/tooplate-chilling-cafe.css'%}" />
+    <link href="{% static 'main/css/default.css'%}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'main/css/fonts.css'%}" rel="stylesheet" type="text/css" media="all" />
+
+<!--
+Tooplate 2118 Chilling Cafe
+https://www.tooplate.com/view/2118-chilling-cafe
+-->
+  </head>
+  <body>
+    <div class="tm-container">
+      <div class="tm-text-white tm-page-header-container">
+        <i class="fas fa-mug-hot fa-2x tm-page-icon"></i>
+        <h3 class="tm-page-header">Железные дороги</h3>
+      </div>
+
+      <div class="tm-main-content">
+        <div id="tm-intro-img"></div>
+        <div id="menu" class="container">
+			<ul>
+				<li class="current_page_item"><a href="{% url 'home' %}" accesskey="1" title="">Главная</a></li>
+				<li><a href="{% url 'route-search' %}" accesskey="1" title="">Билеты</a></li>
+				<li><a href="{% url 'about' %}" accesskey="3" title="">О нас</a></li>
+				<li><a href="{% url 'timetable' %}" accesskey="5" title="">    </a></li>
+                <li><a href="{% url 'timetable' %}" accesskey="5" title="">    </a></li>
+                    {% if user.is_authenticated %}
+                <li><a href="{% url 'profile' %}" accesskey="5" title="">{{ user.get_username }}</a></li>
+                <li><a href="{% url 'logout'%}?next={{request.path}}">Выйти</a></li>
+                        {% if user.is_staff %}
+                        {% endif %}
+                    {% else %}
+                <li><a href="{% url 'login'%}?next={{request.path}}">Войти</a></li>
+                <li><a href="{% url 'register'%}?next={{request.path}}">Регистрация</a></li>
+                    {% endif %}
+			</ul>
+		</div>
+        <!-- Coffee Menu -->
+
+      </div>
+      {% block content %}
+        {% endblock %}
+        <!-- Special Items -->
+              <section class="tm-section">
+                <h2>.</h2>
+                  <br>
+                  <br>
+          <h2 class="tm-section-header">RZD</h2>
+      <!--          </div>-->
+        </section>
+        <div id="page" class="container1">
+		  <div class="column1">
+			  <div class="title">
+				  <h2>Каталог рейсов</h2>
+			  </div>
+              <img src="{% static 'main/img/timetable.jpeg' %}" width="282" height="150" alt="" />
+			  <p> Не знаете куда поехать, но очень хочется? Наш каталог поможет вам выбрать из множества различных вариантов</p>
+<!--              <a href="{% url 'timetable' %}" class="green"> Подробнее </a>-->
+		  </div>
+		  <div class="column2">
+			  <div class="title">
+				  <h2>Наши поезда</h2>
+			  </div>
+<!--			  <img src="static/main/img/train/sapsan.jpg" width="282" height="150" alt="" />-->
+
+              <img src="{% static 'main/img/train/sapsan.jpg' %}" width="282" height="150" alt="" />
+<!--              "{% static 'my_app/example.jpg' %}"-->
+			  <p>Путешествуйте как вам угодно! Отдать предпочтение комфорту или скорости - решаете вы</p>
+		  </div>
+		  <div class="column3">
+			  <div class="title">
+				  <h2>Связаться с нами</h2>
+			  </div>
+			  <img src="{% static 'main/img/call.jpg' %}" width="282" height="150" alt="" />
+			  <p>Если у вас возникли какие-то трудности, работники горячей линии всегда помогут вам!</p>
+<!--              <a href="{% url 'route-search' %}" class="green"> Подробнее </a>-->
+		  </div>
+	    </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <hr />
+        <!-- Talk to us -->
+        <div class="tm-main-content">
+            <div id="menu2" class="container">
+			<ul>
+				<li class="current_page_item"><a href="{% url 'home' %}" accesskey="1" title="">Copyright &copy; 2023 RZD</a></li>
+
+				<li><a href="{% url 'timetable' %}" accesskey="5" title="">Contact Us</a></li>
+			</ul>
+		    </div>
+        </div>
+
+      <footer>
+
+        <h3 class="tm-text-white tm-footer-text">
+          Copyright &copy; 2023 RZD
+          . Design:
+          <a href="https://www.tooplate.com" class="tm-footer-link">Tooplate</a>
+        </h3>
+      </footer>
+    </div>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script>
+      $(function() {
+        // Adjust intro image height based on width.
+        $(window).resize(function() {
+          var img = $("#tm-intro-img");
+          var imgWidth = img.width();
+
+          // 640x425 ratio
+          var imgHeight = (imgWidth * 425) / 640;
+
+          if (imgHeight < 300) {
+            imgHeight = 300;
+          }
+
+          img.css("min-height", imgHeight + "px");
+        });
+      });
+    </script>
+  </body>
+</html>

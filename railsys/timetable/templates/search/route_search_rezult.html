@@ -1,0 +1,68 @@
+{% extends 'main/layout.html' %}
+{% block title %}Рейс {{ route.from_to }}{% endblock %}
+{% block content %}
+{% load static %}
+    <div class="features">
+        <br>
+        <img src="{% static 'main/img/train/sapsan.jpg' %}" width="282" height="150" alt="" />
+        <h1>Поиск рейсов</h1>
+        <form action="{% url 'route-search' %}" method="POST">
+            {% csrf_token %}
+<!--            {{ form.ad_p }}-->
+            <h4> Откуда:  {{form.departure_city}}</h4>
+             <br>
+            <h4> Куда:  {{form.arrival_city}} </h4>
+            <br>
+            <h4> Дата поездки:   {{form.departure_day}} </h4>
+            <br>
+            <input type="submit" value="Найти! ">
+                    {% if results %}
+            <ul>
+
+            <h1>Результаты поиска рейсов  </h1>
+                <h3> {{dep_ct.name}} - {{arr_ct.name}}</h3>
+                <div class="container1">
+
+                    {% for route, add_info in results %}
+
+                        <div class="preticket-strip">
+
+                            <p> Рейс  {{ route.id_route.id}}   "{{add_info.train_type}}":  {{route.tr_dep_city}} - {{route.tr_arr_city}} </p>
+                            <div class="flex-container">
+                                <!-- квадрат отправления -->
+                                <div class="squareone">
+                                    <p> Отправление:  </p>
+                                    <p> {{route.dep_st_name}} </p>
+                                    <p> {{route.dep_time}} </p>
+                                </div>
+                                <!-- квадрат времени -->
+                                <div class="squareone">
+                                    <p>Время в пути (ч/м/c): {{add_info.delta}}</p>
+                                </div>
+                                <!-- квадрат прибытия -->
+                                <div class="squareone">
+                                    <p> Прибытие: </p>
+                                    <p> {{route.arr_st_name}} </p>
+                                    <p> {{route.arr_time}} </p>
+                                </div>
+
+                            </div>
+
+
+
+
+                        <input type="submit" name="b{{route.id}}" value="ВЫБРАТЬ">
+                        </div>
+
+<!--                        </li>-->
+                        {% endfor %}
+
+                </div>
+            </ul>
+                    {% endif %}
+            <span>{{error}}</span>
+
+        </form>
+
+    </div>
+{% endblock %}

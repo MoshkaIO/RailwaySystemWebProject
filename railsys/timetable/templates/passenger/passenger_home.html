@@ -1,0 +1,37 @@
+{% extends 'main/layout.html' %}
+{% block title %}Пассажиры{% endblock %}
+{% block content %}
+    <div class="features">
+        <br>
+        <h1>Список пассажиров</h1>
+        <a href="{% url 'pas-create' %}?next={{request.path}}" class="green">Добавить пассажира</a>
+        <form action="{% url 'pas-list' %}" method="POST">
+             {% csrf_token %}
+            <div class="container1">
+                {% if pas %}
+        {% for el in pas %}
+            <div class="preticket-strip">
+                 <h3>Имя: {{ el.first_name}}</h3>
+                <h3>Фамилия: {{ el.second_name}}</h3>
+                <h4>Дата Рождения:{{el.birthday}}</h4>
+                <h4>Тип документа: {{el.doc_type}}</h4>
+                <h4>Серия и или номер документа: {{el.doc_info}}</h4>
+                <input type="submit" name="b_upd_{{el.id}}" value=" Редактировать ">
+                <input type="submit" name="b_del_{{el.id}}" value=" Удалить ">
+
+            </div>
+        {% endfor %}
+        {% else %}
+        <h1>У вас нет пассажиров</h1>
+        {% endif %}
+
+
+            </div>
+
+
+        </form>
+
+
+        {# коммент типо #}
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'main/layout.html' %}
+{% block title %}Расписание{% endblock %}
+{% block content %}
+    <div class="features">
+        <h1>Расписание поездов</h1>
+       <!-- <p>заглушка</p>
+        <button class="btn btn-warning"> нюх бе</button>
+            {{ routes }} -->
+        <a href="{% url 'create' %}"><li><i class="fa-solid fa-user"></i> Добавить рейс </li></a>
+        {% if routes %}'
+        {{routes}}
+        {% for el in routes %}
+            <div class="alert alert-warning">
+                 <h3>{{ el.from_to}}</h3>
+                <h4>{{el.date}} - {{el.end_date}}</h4>
+                <h4> {{el.description}}</h4>
+                <p>{{el.big_text}}</p>
+                <a href="{% url 'route-detail' el.id%}" class = "btn btn-warning"> ПОДРОБНЕЕ</a>
+
+            </div>
+        {% endfor %}
+        {% endif %}
+
+        {# коммент типо #}
+    </div>
+{% endblock %}

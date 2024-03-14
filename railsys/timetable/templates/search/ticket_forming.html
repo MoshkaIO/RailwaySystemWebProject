@@ -1,0 +1,57 @@
+{% extends 'main/layout.html' %}
+    {% block title %}Оформление {% endblock %}
+{% block content %}
+    <div class="features">
+        <br>
+        <h1>Оформление билета</h1>
+
+        <div class="container1">
+
+                        <div class="preticket-strip">
+                            <p> Рейс  {{ route.id_route.id}}   "{{train_type}}":  {{ route.dep_st_name }} - {{route.tr_arr_city}} </p>
+                            <div class="flex-container">
+                                <!-- квадрат отправления -->
+                                <div class="squareone">
+                                    <h3> Отправление:  </h3>
+                                    <p> {{route.dep_st_name}} </p>
+                                    <p> {{route.dep_time}} </p>
+                                </div>
+                                <!-- квадрат времени -->
+                                <div class="squareone">
+                                    <p>Время в пути (ч/м/c): {{delta}} </p>
+                                </div>
+                                <!-- квадрат прибытия -->
+                                <div class="squareone">
+                                    <h3> Прибытие: </h3>
+                                    <p> {{route.arr_st_name}} </p>
+                                    <p> {{route.arr_time}} </p>
+                                </div>
+
+                            </div>
+                            <div class="flex-container">
+
+                                <div class="squareone">
+                                    <h3> Информация о месте:</h3>
+                                    <p> Номер вагона: {{chosen_car_number}}</p>
+                                    <p> Номер места: {{chosen_place_number}}</p>
+                                    <p> Тип места: {{place.place_type}}</p>
+                                    <p> Цена: {{price}} рублей!</p>
+                                </div>
+                            </div>
+                        </div>
+
+        </div>
+
+
+
+        <h4> Выберите пассажира: <h4>
+            <form action="{% url 'ticket-buy' %}" method="POST">
+            {% csrf_token %}
+            {{ form.passenger }}
+            <input type="submit" value="Перейти к оформлению билета ">
+        <h4> Если нужного пассажира нет в списке, вы можете его добавить в личном кабинете </h4>
+                <a href="{% url 'pas-create'%}" class="green">Добавить</a>
+    </div>
+
+
+{% endblock %}

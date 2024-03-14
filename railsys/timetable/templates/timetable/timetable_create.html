@@ -1,0 +1,21 @@
+{% extends 'main/layout.html' %}
+{% block title %}Добавление рейса{% endblock %}
+{% block content %}
+    <div class="features">
+        <h1>Добавление рейса</h1>
+        <form method="GET">
+            {% csrf_token %}
+            {{form.from_to}} <br>
+            {{form.description}}<br>
+            {{form.big_text}}<br>
+            {{form.date}}<br>
+            {{form.end_date}}<br>
+            {{form.test}}<br>
+            <span>{{error}}</span>
+            <p>брррр</p>
+
+            <button type="submit">Добавить рейс</button>
+        </form>
+
+    </div>
+{% endblock %}

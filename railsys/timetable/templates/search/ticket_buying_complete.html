@@ -1,0 +1,60 @@
+{% extends 'main/layout.html' %}
+    {% block title %}Покупка {% endblock %}
+{% block content %}
+    <div class="features">
+        <h1>Билет приобретён</h1>
+
+        <div class="container1">
+
+                        <div class="preticket-strip">
+                            <p> Рейс  {{ route.id_route.id}}   "{{train_type}}":  {{ route.dep_st_name }} - {{route.tr_arr_city}} </p>
+                            <div class="flex-container">
+                                <!-- квадрат отправления -->
+                                <div class="squareone">
+                                    <h3> Отправление:  </h3>
+                                    <p> {{route.dep_st_name}} </p>
+                                    <h4> {{route.dep_time}} </h4>
+                                </div>
+                                <!-- квадрат времени -->
+                                <div class="squareone">
+                                    <p>Время в пути (ч/м/c): {{delta}} </p>
+                                </div>
+                                <!-- квадрат прибытия -->
+                                <div class="squareone">
+                                    <h3> Прибытие: </h3>
+                                    <p> {{route.arr_st_name}} </p>
+                                    <h4> {{route.arr_time}} </h4>
+                                </div>
+
+                            </div>
+                            <div class="flex-container">
+
+                                <div class="squareone">
+                                    <h3> Информация о месте:</h3>
+                                    <p> Номер вагона: {{chosen_car_number}}</p>
+                                    <p> Номер места: {{chosen_place_number}}</p>
+                                    <p> Тип места: {{place.place_type}}</p>
+                                    <h4> Цена: {{price}} рублей!</h4>
+                                </div>
+                                <div class="squareone">
+                                    <h3>Информация о пассажире </h3>
+                                    <p>Имя: {{chosen_passenger.first_name}}</p>
+                                     <p>Фамилия: {{chosen_passenger.second_name}}</p>
+                                    <p>Дата Рождения: {{chosen_passenger.birthday}}</p>
+                                    <p>Тип документа: {{chosen_passenger.doc_type}}</p>
+                                    <h4>Серия и или номер документа: {{chosen_passenger.doc_info}}</h4>
+
+                                </div>
+                            </div>
+                            <h4> Этот и другие купленные билеты вы можете увидеть  в личном кабинете </h4>
+                            <a href="{% url 'ticket-list'%}" class="green">Список билетов</a>
+                        </div>
+
+        </div>
+
+
+
+    </div>
+
+
+{% endblock %}

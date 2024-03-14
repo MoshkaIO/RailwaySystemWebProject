@@ -1,0 +1,94 @@
+{% extends 'main/layout.html' %}
+{% block title %}Выбор места {% endblock %}
+{% block content %}
+    <div class="features">
+        <form action="{% url 'place-search' %}" method="POST">
+            {% csrf_token %}
+
+            <div class="container1">
+<!--                    <li>-->
+                        <div class="preticket-strip">
+                            <p> Рейс  {{ route.id_route.id}}   "{{train_type}}":  {{ route.dep_st_name }} - {{route.tr_arr_city}} </p>
+                            <div class="flex-container">
+                                <!-- квадрат отправления -->
+                                <div class="squareone">
+                                    <p> Отправление:  </p>
+                                    <p> {{route.dep_st_name}} </p>
+                                    <p> {{route.dep_time}} </p>
+                                </div>
+                                <!-- квадрат времени -->
+                                <div class="squareone">
+                                    <p>Время в пути (ч/м/c): {{delta}} </p>
+
+                                </div>
+                                <!-- квадрат прибытия -->
+                                <div class="squareone">
+                                    <p> Прибытие: </p>
+                                    <p> {{route.arr_st_name}} </p>
+                                    <p> {{route.arr_time}} </p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                </div>
+        {% if seats %}'
+        {{routes}}
+
+        {% endif %}
+            <div class="flex-container" id="cars">
+                <div class="squareone">
+
+                    <h1> ВАГОНЫ: </h1>
+        {% if cars %}
+            {% for el in cars %}
+
+            <h3> Вагон № {{el.carriage_number}} </h3>
+            <input type="submit" name="b{{el.carriage_number}}" value="ВЫБРАТЬ">
+<!--            <h3> Его места: </h3>-->
+<!--            <p> {el.get_all_seats} </p>-->
+
+            {% endfor %}
+        {% endif %}
+
+                </div>
+                <div class="squareone">
+                    <h1> МЕСТА В ВАГОНЕ {{chosen_car_number}}: </h1>
+            <!--{% if seats %}
+            {% for ell in seats %}
+
+            <h3> Место № {{ell.place_number}}  </h3>
+            <input type="submit" name="sb{{ell.place_number}}" value=" выбрать место">
+
+            {% endfor %}
+            {% endif %}-->
+                    {% if price_place_list %}
+            {% for ell in price_place_list %}
+
+            <h3> Место № {{ell.place}}  </h3>
+                    <h4> ( {{ell.price}}) руб.</h4>
+                    {% if ell.is_occupied %}
+                    <h3> Место занято :(</h3>
+                    {% else %}
+            <input type="submit" name="sb{{ell.place}}" value=" выбрать место">
+                    {% endif %}
+
+            {% endfor %}
+            {% endif %}
+
+                </div>
+
+            </div>
+
+
+
+        <!-- <p>заглушка</p>
+         {% for el in routes %}
+         {% endfor %}
+        -->
+        {# коммент типо #}
+
+        </form>
+
+    </div>
+{% endblock %}

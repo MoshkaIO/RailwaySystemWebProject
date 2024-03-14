@@ -1,0 +1,33 @@
+{% extends 'main/layout.html' %}
+{% block title %}Рейс {{ route.from_to }}{% endblock %}
+{% block content %}
+    <div class="features">
+        <h1>Поезд</h1>
+        <h3>{{mes}}</h3>
+        <h3>Тип поезда: {{ route.train_type }}</h3>
+        <h3>Номер поезда: {{ route.train_number }}</h3>
+        <a href="{%  url 'train-delete' route.id %}" class="green">Удалить</a>
+        <a href="{%  url 'train-update' route.id %}" class="green">Редактировать</a>
+        <a href="{% url 'train-home' %}" class="green">Вернуться к списку</a>
+        <div class="container1">
+            <h2> Вагоны поезда: </h2>
+            {% if rp %}
+        {% for el in cars %}:
+            <div class="preticket-strip">
+                <div class="flex-container">
+                    <div class="squareone">
+                        <h1> Вагон № </h1>
+                        <h3>{{el.carriage_number}}</h3>
+                    </div>
+                    <div class="squareone">
+                        <h1> Тип: </h1>
+                        <h3>{{el.id_carriage_type}}</h3>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

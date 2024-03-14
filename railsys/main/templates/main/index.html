@@ -1,0 +1,33 @@
+{% extends 'main/layout.html' %}
+{% block title %}Главная страница{% endblock %}
+{% block content %}
+{% load static %}
+<div class="container1">
+		<div class="column1">
+			<div class="title">
+				<h2>Железнодорожный перевозчик</h2>
+			</div>
+			<img src="{% static 'main/img/station.jpeg' %}" width="282" height="150" alt="" />
+			<p>Это <strong>RZD</strong>, наш проект по созданию единой информационной системы. </p>
+			<a href="{% url 'about' %}" class="green"> Подробнее </a>
+		</div>
+		<div class="column2">
+			<div class="title">
+				<h2>Покупка билетов</h2>
+			</div>
+			<img src="static/main/img/ticket.jpeg" width="282" height="150" alt="" />
+			<p>Здесь вы можете приобрести билет на любой рейс</p>
+			<a href="{% url 'route-search' %}" class="green"> Подробнее </a>
+		</div>
+		<div class="column3">
+			<div class="title">
+				<h2>Личный кабинет</h2>
+			</div>
+			<img src="static/main/img/lc.jpg" width="282" height="150" alt="" />
+			<p>Вы больше никогда не потеряете купленные билеты.  </p>
+			<a href="{% url 'profile' %}" class="green"> Подробнее </a>
+		</div>
+	</div>
+
+
+{% endblock %}

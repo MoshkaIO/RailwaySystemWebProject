@@ -1,0 +1,66 @@
+{% extends 'main/layout.html' %}
+{% block title %}Билеты{% endblock %}
+{% block content %}
+    <div class="features">
+        <h1>Список приобретённых билетов</h1>
+        <form action="{% url 'ticket-list' %}" method="POST">
+             {% csrf_token %}
+
+
+
+            <div class="container1">
+                {% if mylist %}
+
+                {% for chosen_passenger, route, item3, add_info in mylist %}
+                        <div class="preticket-strip">
+                            <h1> БИЛЕТ №{{ route.id}}-{{chosen_passenger.id}}</h1>
+                            <p> На рейс  {{ route.id_route.id}}   "{{add_info.train_type}}":  {{ route.dep_st_name }} - {{route.tr_arr_city}} </p>
+                            <div class="flex-container">
+                                <!-- квадрат отправления -->
+                                <div class="squareone">
+                                    <h3> Отправление:  </h3>
+                                    <p> {{route.dep_st_name}} </p>
+                                    <p> {{route.dep_time}} </p>
+                                </div>
+                                <!-- квадрат времени -->
+                                <div class="squareone">
+                                    <p>Время в пути (ч/м/c): {{add_info.delta}} </p>
+                                </div>
+                                <!-- квадрат прибытия -->
+                                <div class="squareone">
+                                    <h3> Прибытие: </h3>
+                                    <p> {{route.arr_st_name}} </p>
+                                    <p> {{route.arr_time}} </p>
+                                </div>
+
+                            </div>
+                            <div class="flex-container">
+
+                                <div class="squareone">
+                                    <h3> Информация о месте:</h3>
+                                    <p> Номер вагона: {{item3.car_number}}</p>
+                                    <p> Номер места: {{item3.place_number}}</p>
+                                    <p> Тип места: {{item3.place_type}}</p>
+                                    <p> Цена: {{item3.price}} рублей!</p>
+                                </div>
+                                <div class="squareone">
+                                    <h3>Информация о пассажире </h3>
+                                    <p>Имя: {{chosen_passenger.first_name}}</p>
+                                     <p>Фамилия: {{chosen_passenger.second_name}}</p>
+                                    <p>Дата Рождения: {{chosen_passenger.birthday}}</p>
+                                    <p>Тип документа: {{chosen_passenger.doc_type}}</p>
+                                    <h4>Серия и или номер документа: {{chosen_passenger.doc_info}}</h4>
+
+                                </div>
+                            </div>
+                            <input type="submit" name="b_del_{{item3.ticket_id}}" value=" Удалить ">
+                        </div>
+                {% endfor %}
+        {% else %}
+        <h1>У вас нет купленных билетов!</h1>
+        {% endif %}
+        </div>
+
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'main/layout.html' %}
+{% block title %}Расписание{% endblock %}
+{% block content %}
+    <div class="features">
+        <h1>Рейсы</h1>
+
+            <a href="{% url 'route-create' %}" class="green"> Добавить рейс </a>
+        <a href="{%  url 'admin-views-menu' %}" class="green">Вернуться к списку</a>
+
+        <form action="{% url 'route-home' %}" method="POST">
+            {% csrf_token %}
+            <p> Отображены объекты с {{first_el}} по {{last_el}} </p>
+            <p> Всего объектов: {{total}}</p>
+
+            <input type="submit" name="b_sub10" value=" Показать предыдущие 10 ">
+            <input type="submit" name="b_add10" value=" Показать следующие 10 ">
+            {% if elements %}
+        <div class="container1">
+            {% for el in elements %}
+            <div class="preticket-strip">
+                 <h3>{{ el.id_train}}</h3>
+                <h4> Базовая цена билета : {{el.base_price}}</h4>
+                <h3>{{el}}</h3>
+                <input type="submit" name="b_detail_{{el.id}}" value=" Подробнее ">
+
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        </form>
+    </div>
+{% endblock %}

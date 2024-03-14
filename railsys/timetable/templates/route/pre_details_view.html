@@ -1,0 +1,18 @@
+{% extends 'main/layout.html' %}
+{% block title %}Рейс {{ route.from_to }}{% endblock %}
+{% block content %}
+    <div class="features">
+        <h1>ПреРейс типо да</h1>
+        <h3>{{ route.id_route }}</h3>
+        <h3> Из  {{ route.dep_st_name }} в {{ route.arr_st_name }}  </h3>
+        <h3> Время отправление поезда: {{ route.dep_time }}</h3>
+        <h3> Время прибытия поезда: {{ route.arr_time }} </h3>
+        <h3> Пытаюсь вызвать фунцию отображения мест: </h3>
+       <!-- <p>заглушка</p>
+        <button class="btn btn-warning"> нюх бе</button>
+            {{ routes }}
+        <a href="{%  url 'route-delete' route.id %}">удолить</a>
+        <a href="{%  url 'route-update' route.id %}">редакт</a>-->
+        {# коммент типо #}
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'main/layout.html' %}
+    {% block title %}Покупка {% endblock %}
+{% block content %}
+    <div class="features">
+        <h1>{{page_title}}</h1>
+        <form method="POST">
+
+            <!-- <input type="submit" value="добавить" />
+            <input type="hidden" name="next" value="{{ next }}" /> -->
+            <div class="preticket-strip">
+                <h4> Внимательно заполните следующие поля: </h4>
+            {% csrf_token %}
+            <p> Имя: </p>
+            {{form.first_name}} <br>
+            <p> Фамилия: </p>
+            {{form.second_name}} <br>
+            <p> Дата рождения: </p>
+            {{form.birthday}} <br>
+            <p> Тип документа: </p>
+            {{form.document_type}} <br>
+            <p> Серия и номер документа:</p>
+            {{form.document_number}} <br>
+            <span>{{error}}</span>
+
+<button type="submit">{{add_buttom_text}}</button>
+
+            </div>
+
+        </form>
+
+
+
+
+
+    </div>
+
+
+{% endblock %}

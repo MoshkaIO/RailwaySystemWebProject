@@ -1,0 +1,34 @@
+{% extends 'main/layout.html' %}
+    {% block title %}Оформление {% endblock %}
+{% block content %}
+    <div class="features">
+        <div class="preticket-strip">
+            <h1>Профиль пользователя</h1>
+        <h2> Информация о пользователе: </h2>
+        <h3> Имя : {{ user.get_username }}</h3>
+        <h3> Полное имя: : {{get_full_name}}</h3>
+        {% if user.is_authenticated %}
+            <div class="flex-container">
+<a href="{% url 'logout'%}?next={{request.path}}" class="green">Выйти</a>
+                <a href="{% url 'pas-list'%}?next={{request.path}}" class="green">Ваши пассажиры</a>
+         <a href="{% url 'ticket-list'%}" class="green"> Ваши билеты </a>
+                {% if user.is_staff %}
+                <a href="/timetable/admin/home" class="green"> Админ-панель </a>
+                {% endif %}
+                    {% else %}
+                <a href="{% url 'login'%}?next={{request.path}}" class="green">Войти</a>
+                    {% endif %}
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+{% endblock %}

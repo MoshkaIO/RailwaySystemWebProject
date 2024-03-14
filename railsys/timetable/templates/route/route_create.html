@@ -1,0 +1,18 @@
+{% extends 'main/layout.html' %}
+{% block title %}Добавление рейса{% endblock %}
+{% block content %}
+    <div class="features">
+        <h1>Добавление рейса</h1>
+        <form method="POST">
+<!--            action="{% url 'route-home' %}"-->
+            {% csrf_token %}
+            {{form.id_train}} <br>
+            {{form.base_price}}<br>
+            <span>{{error}}</span>
+             <a href="{% url 'route-home' %}" class="green"> Вернуться к списку </a>
+
+            <button type="submit">Добавить рейс</button>
+        </form>
+
+    </div>
+{% endblock %}

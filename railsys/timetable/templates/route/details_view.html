@@ -1,0 +1,43 @@
+{% extends 'main/layout.html' %}
+{% block title %}Рейс {{ route.from_to }}{% endblock %}
+{% block content %}
+    <div class="features">
+        <h1>Рейс</h1>
+        <h3>{{mes}}</h3>
+        <h3>{{ route.id_train }}</h3>
+        <p> Базовая цена за билет: {{route.base_price}}</p>
+        <h3> Из  { route.get_dep_arr_data.dep_station_name } в { route.get_dep_arr_data.arr_station_name }  </h3>
+        <h3> Время отправление поезда: { route.get_dep_arr_data.departure_time }</h3>
+        <h3> Время прибытия поезда: { route.get_dep_arr_data.arrive_time } </h3>
+        <a href="{%  url 'route-delete' route.id %}" class="green">Удалить</a>
+        <a href="{%  url 'route-update' route.id %}" class="green">Редактировать</a>
+        <a href="{% url 'route-home' %}" class="green">Вернуться к списку</a>
+        <div class="container1">
+            <h2> Расписание: </h2>
+            <p>(представленное расписание является образом для всех аналогичных рейсов)</p>
+            {% if rp %}
+        {% for el in rp %}:
+            <div class="preticket-strip">
+                <div class="flex-container">
+                    <div class="squareone">
+                        <h1> Станция </h1>
+                        <h3>{{el.get_station_inf.name}}</h3>
+                    </div>
+                    <div class="squareone">
+                        <h1> Прибытие </h1>
+                        <h3>{{el.arrive_time}}</h3>
+                    </div>
+                    <div class="squareone">
+                        <h1> Отправление </h1>
+                        <h3>{{el.departure_time}}</h3>
+                    </div>
+                </div>
+                <h3> Посадка: {{el.boarding}}</h3>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        {# коммент типо #}
+    </div>
+{% endblock %}

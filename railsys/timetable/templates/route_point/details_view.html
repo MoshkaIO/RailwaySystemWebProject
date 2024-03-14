@@ -1,0 +1,42 @@
+{% extends 'main/layout.html' %}
+{% block title %}Рейс {{ route.from_to }}{% endblock %}
+{% block content %}
+    <div class="features">
+        <h1>Рейс</h1>
+        <h3>{{mes}}</h3>
+        <div class="preticket-strip">
+            <h3>{{ rp.id_route }}</h3>
+            <h3> Станц </h3>
+            <h3>{{ rp.id_station }}</h3>
+            <h3> Отправление </h3>
+            <h3>{{ rp.departure_time }}</h3>
+            <h3> Прибытие </h3>
+            <h3>{{ rp.arrive_time }}</h3>
+
+            <h3>{{ rp.boarding }}</h3>
+
+        </div>
+        <div class="preticket-strip">
+                <div class="flex-container">
+                    <div class="squareone">
+                        <h1> Станция </h1>
+                        <h3>{{rp.get_station_inf.name}}</h3>
+                    </div>
+                    <div class="squareone">
+                        <h1> Прибытие </h1>
+                        <h3>{{rp.arrive_time}}</h3>
+                    </div>
+                    <div class="squareone">
+                        <h1> Отправление </h1>
+                        <h3>{{rp.departure_time}}</h3>
+                    </div>
+                </div>
+                <h3> Посадка: {{rp.boarding}}</h3>
+            <a href="{%  url 'route-point-delete' rp.id %}" class="green">Удалить</a>
+        <a href="{%  url 'route-point-update' rp.id %}" class="green">Редактировать</a>
+        <a href="{% url 'route-point-home' %}" class="green">Вернуться к списку</a>
+            </div>
+
+        {# коммент типо #}
+    </div>
+{% endblock %}
